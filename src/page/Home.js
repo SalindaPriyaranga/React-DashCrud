@@ -21,24 +21,23 @@ const Home = (props) => {
 
     }
 
-    const setData = (data) => {
+    const editData = (data) => {
         //console.log(data);
 
-        localStorage.setItem('ID', data.id);
-        localStorage.setItem('vehicletype', data.vehicletype);
-        localStorage.setItem('status', data.status);
-        props.history.push('/upd');
+       
+        props.history.push('/home');
     }
 
 
     const deleveh = async (id_no) => {
-        console.log(token);
+        // console.log(token);
+
         const url = 'http://localhost:3003/vehicle/' + id_no;
 
         axios.put(url, { headers: { "Authorization": `Bearer ${token}` } })
             .then(response => {
                 console.log(response);
-                //<fetchProducts/>
+               
                 props.history.push('/home');
 
             }).catch(error => {
@@ -106,7 +105,7 @@ const Home = (props) => {
                                 <TableCell align="right">{vehicle.createdAt}</TableCell>
                                 <TableCell align="right">{vehicle.updatedAt}</TableCell>
                                 <TableCell align="right">
-                                    <button onClick={() => setData(vehicle)}>Update</button></TableCell>
+                                    <button onClick={() => editData(vehicle)}>Update</button></TableCell>
                                 <TableCell align="right"><button id="del" name="del" type="button"
                                     onClick={() => deleveh(vehicle.id)}>Delete</button> </TableCell>
 
